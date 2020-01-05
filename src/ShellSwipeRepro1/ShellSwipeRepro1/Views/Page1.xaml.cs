@@ -10,8 +10,6 @@ namespace ShellSwipeRepro1.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page1 : ContentPage
     {
-        private int _count = 3;
-
         public ObservableCollection<Item> ObservableCollection { get; set; }
 
         public Page1()
