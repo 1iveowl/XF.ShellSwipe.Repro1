@@ -48,7 +48,8 @@
                                Text="Left swipes on green box: 0"></Label>
                 </Grid>
 
-                <StackLayout Grid.Row="2">
+                <StackLayout Grid.Row="2"
+                             Margin="8">
 
                     <SwipeView x:Name="SingleSwipeItem" 
                                HeightRequest="60"
@@ -73,7 +74,7 @@
 
                         <SwipeView.Content>
                             <StackLayout BackgroundColor="Coral">
-                                <Label Text="Stand alone SwipeItem"></Label>
+                                <Label Text="Standalone SwipeItem"></Label>
                             </StackLayout>
                         </SwipeView.Content>
                     </SwipeView>
