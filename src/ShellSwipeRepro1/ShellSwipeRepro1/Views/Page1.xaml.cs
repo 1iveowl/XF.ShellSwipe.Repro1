@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using ShellSwipeRepro1.Models;
 using Xamarin.Forms;
@@ -23,6 +24,10 @@ namespace ShellSwipeRepro1.Views
 
             MyCollectionView.ItemsSource = ObservableCollection;
 
+            SingleSwipeItem.LeftItems.FirstOrDefault().Command = new Command(() => {});
+
+            SingleSwipeItem.RightItems.FirstOrDefault().Command = new Command(() => { });
+
             ObservableCollection.Add(new Item
             {
                 Description = "Item 1",
@@ -42,14 +47,14 @@ namespace ShellSwipeRepro1.Views
         {
             _left++;
 
-            LeftSwipeLabel.Text = $"Left swipes: {_left}";
+            LeftSwipeLabel.Text = $"Left swipes on green box: {_left}";
         }
 
         private void SwipeGestureRecognizer_OnSwipedRight(object sender, SwipedEventArgs e)
         {
             _right++;
 
-            RightSwipeLabel.Text = $"Right swipes: {_right}";
+            RightSwipeLabel.Text = $"Right swipes on green box: {_right}";
         }
     }
 }

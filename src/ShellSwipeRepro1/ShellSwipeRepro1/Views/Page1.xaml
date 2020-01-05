@@ -12,11 +12,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"></RowDefinition>
                     <RowDefinition Height="44"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <BoxView Grid.Row="0" 
                      HeightRequest="80"
-                     BackgroundColor="Aqua"
+                     BackgroundColor="Green"
                      WidthRequest="200"
                      Margin="8,24,8,16"
                      HorizontalOptions="Center"
@@ -27,79 +28,120 @@
                     </BoxView.GestureRecognizers>
                 </BoxView>
 
-                <StackLayout Grid.Row="1" 
-                         Orientation="Horizontal"
+                <Grid Grid.Row="1" 
                          Margin="8">
-                    <Label x:Name="LeftSwipeLabel"
-                       HorizontalOptions="Start"
-                       HorizontalTextAlignment="Start" 
-                       VerticalOptions="Center"
-                       Text="Left swipes: 0"></Label>
-                    <Label x:Name="RightSwipeLabel"
-                       HorizontalOptions="End"
-                       HorizontalTextAlignment="End" 
-                       VerticalOptions="Center"
-                       Text="Left swipes: 0"></Label>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                        <Label x:Name="LeftSwipeLabel"
+                               Grid.Column="0"
+                               HorizontalOptions="Start"
+                               HorizontalTextAlignment="Start" 
+                               VerticalOptions="Center"
+                               Text="Left swipes on green box: 0"></Label>
+                        <Label x:Name="RightSwipeLabel"
+                               Grid.Column="0"
+                               HorizontalOptions="End"
+                               HorizontalTextAlignment="End" 
+                               VerticalOptions="Center"
+                               Text="Left swipes on green box: 0"></Label>
+                </Grid>
+
+                <StackLayout Grid.Row="2">
+
+                    <SwipeView x:Name="SingleSwipeItem" 
+                               HeightRequest="60"
+                               VerticalOptions="Center">
+                        <SwipeView.RightItems>
+                            <SwipeItems SwipeBehaviorOnInvoked="Close"
+                                                Mode="Execute">
+                                <SwipeItem Text="Right"
+                                                   BackgroundColor="Green"></SwipeItem>
+                            </SwipeItems>
+
+                        </SwipeView.RightItems>
+
+                        <SwipeView.LeftItems>
+                            <SwipeItems SwipeBehaviorOnInvoked="Close"
+                                                Mode="Execute">
+                                <SwipeItem Text="Left"
+                                                   BackgroundColor="Red"></SwipeItem>
+                            </SwipeItems>
+
+                        </SwipeView.LeftItems>
+
+                        <SwipeView.Content>
+                            <StackLayout BackgroundColor="Coral">
+                                <Label Text="Stand alone SwipeItem"></Label>
+                            </StackLayout>
+                        </SwipeView.Content>
+                    </SwipeView>
                 </StackLayout>
 
-                <CollectionView x:Name="MyCollectionView"
-                            Grid.Row="2"
-                            SelectionMode="None"
-                            Margin="8">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical"
+                <StackLayout Grid.Row="3"
+                             Margin="8">
+                    <Label Text="Collection View:"></Label>
+                    <CollectionView x:Name="MyCollectionView"
+                                    Grid.Row="2"
+                                    SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
                                      VerticalItemSpacing="8"></GridItemsLayout>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Item">
-                            <Grid Margin="8,6,8,6" 
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Item">
+                                <Grid Margin="8,6,8,6" 
                               CascadeInputTransparent="False">
 
-                                <SwipeView HeightRequest="60"
+                                    <SwipeView HeightRequest="60"
                                        VerticalOptions="Center">
-                                    <SwipeView.RightItems>
-                                        <SwipeItems SwipeBehaviorOnInvoked="Close"
+                                        <SwipeView.RightItems>
+                                            <SwipeItems SwipeBehaviorOnInvoked="Close"
                                                 Mode="Execute">
-                                            <SwipeItem Text="Right"
+                                                <SwipeItem Text="Right"
                                                    BackgroundColor="Green"
                                                    Command="{Binding Right}"></SwipeItem>
-                                        </SwipeItems>
+                                            </SwipeItems>
 
-                                    </SwipeView.RightItems>
+                                        </SwipeView.RightItems>
 
-                                    <SwipeView.LeftItems>
-                                        <SwipeItems SwipeBehaviorOnInvoked="Close"
+                                        <SwipeView.LeftItems>
+                                            <SwipeItems SwipeBehaviorOnInvoked="Close"
                                                 Mode="Execute">
-                                            <SwipeItem Text="Left"
+                                                <SwipeItem Text="Left"
                                                    BackgroundColor="Red"
                                                    Command="{Binding Left}"></SwipeItem>
-                                        </SwipeItems>
+                                            </SwipeItems>
 
-                                    </SwipeView.LeftItems>
+                                        </SwipeView.LeftItems>
 
-                                    <SwipeView.Content>
-                                        <Grid VerticalOptions="Center"
+                                        <SwipeView.Content>
+                                            <Grid VerticalOptions="Center"
                                           BackgroundColor="Bisque">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                                <ColumnDefinition Width="4*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0"
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0"
                                                Text="{Binding Id}"></Label>
-                                            <Label Grid.Column="1"
+                                                <Label Grid.Column="1"
                                                Text="{Binding Text}"></Label>
-                                            <Label Grid.Column="2"
+                                                <Label Grid.Column="2"
                                                Text="{Binding Description}"></Label>
-                                        </Grid>
-                                    </SwipeView.Content>
-                                </SwipeView>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                                            </Grid>
+                                        </SwipeView.Content>
+                                    </SwipeView>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
 
 
-                </CollectionView>
+                    </CollectionView>
+                </StackLayout>
+
+                
 
             </Grid>
         </ScrollView>
