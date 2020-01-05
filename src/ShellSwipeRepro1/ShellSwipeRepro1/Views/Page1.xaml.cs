@@ -10,6 +10,9 @@ namespace ShellSwipeRepro1.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page1 : ContentPage
     {
+        private int _left;
+        private int _right;
+
         public ObservableCollection<Item> ObservableCollection { get; set; }
 
         public Page1()
@@ -33,6 +36,20 @@ namespace ShellSwipeRepro1.Views
                 Id = "2",
                 Text = "Text 2"
             });
+        }
+
+        private void SwipeGestureRecognizer_OnSwipedLeft(object sender, SwipedEventArgs e)
+        {
+            _left++;
+
+            LeftSwipeLabel.Text = $"Left swipes: {_left}";
+        }
+
+        private void SwipeGestureRecognizer_OnSwipedRight(object sender, SwipedEventArgs e)
+        {
+            _right++;
+
+            RightSwipeLabel.Text = $"Right swipes: {_right}";
         }
     }
 }

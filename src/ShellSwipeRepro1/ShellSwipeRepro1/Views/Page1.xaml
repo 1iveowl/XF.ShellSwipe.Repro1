@@ -8,9 +8,43 @@
              x:Class="ShellSwipeRepro1.Views.Page1">
     <ContentPage.Content>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="44"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <BoxView Grid.Row="0" 
+                     HeightRequest="80"
+                     BackgroundColor="Aqua"
+                     WidthRequest="200"
+                     Margin="8,24,8,16"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center">
+                <BoxView.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_OnSwipedLeft"></SwipeGestureRecognizer>
+                    <SwipeGestureRecognizer Direction="Right"  Swiped="SwipeGestureRecognizer_OnSwipedRight"></SwipeGestureRecognizer>
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <StackLayout Grid.Row="1" 
+                         Orientation="Horizontal"
+                         Margin="8">
+                <Label x:Name="LeftSwipeLabel"
+                       HorizontalOptions="Start"
+                       HorizontalTextAlignment="Start" 
+                       VerticalOptions="Center"
+                       Text="Left swipes: 0"></Label>
+                <Label x:Name="RightSwipeLabel"
+                       HorizontalOptions="End"
+                       HorizontalTextAlignment="End" 
+                       VerticalOptions="Center"
+                       Text="Left swipes: 0"></Label>
+            </StackLayout>
+
             <CollectionView x:Name="MyCollectionView"
+                            Grid.Row="2"
                             SelectionMode="None"
-                            Margin="8,24,8,24">
+                            Margin="8">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
                                      VerticalItemSpacing="8"></GridItemsLayout>
